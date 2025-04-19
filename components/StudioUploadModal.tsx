@@ -1,20 +1,16 @@
-'use client';
+"use client";
 
-import { PlusIcon } from 'lucide-react';
-import React from 'react';
+import { PlusIcon } from "lucide-react";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import { trpc } from '@/trpc/client';
+import { Button } from "@/components/ui/button";
+import { trpc } from "@/trpc/client";
 
 const StudioUploadModal = () => {
   const utils = trpc.useUtils();
-  const create = trpc.videos.create.useMutation({
-    onSuccess: () => {
-      utils.studio.getMany.invalidate();
-    },
-  });
+  const create = trpc.videos.create.useMutation();
   return (
-    <Button variant={'secondary'} onClick={() => create.mutate()}>
+    <Button variant={"secondary"} onClick={() => create.mutate()}>
       <PlusIcon />
       <span>Create</span>
     </Button>
