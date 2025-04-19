@@ -8,7 +8,11 @@ import { trpc } from "@/trpc/client";
 
 const StudioUploadModal = () => {
   const utils = trpc.useUtils();
-  const create = trpc.videos.create.useMutation();
+  const create = trpc.videos.create.useMutation({
+    onSuccess: async () => {
+      await utils.studio.getMany.invalidate();
+    },
+  });
   return (
     <Button variant={"secondary"} onClick={() => create.mutate()}>
       <PlusIcon />
